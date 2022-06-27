@@ -28,3 +28,5 @@ go run main.go init-pledge
 InitialPledge for 32 GiB:  0.17011580252903266
 InitialPledge for 1 TiB:  5.443705680929045  
 ```
+
+![Alt](https://repobeats.axiom.co/api/embed/7e33e91436ecc8340f7b2e2988047e1f4a2c016e.svg "Repobeats analytics image")
