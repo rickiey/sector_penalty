@@ -2,7 +2,8 @@
 
 #### Estimated Filecoin network penalties for miner faulted sector
 
-- [x] windowPoSt  handleProvingDeadline penalty  
+- [x] windowPoSt  handleProvingDeadline penalty
+- [x] sector InitialPledge calculate
 - [ ]  depositToBurn
 - [ ] todo
 
@@ -22,4 +23,8 @@ miner f0397332 fault sectors 232 , recoveries sectors 0
 miner f0397332 Estimated 24-hour windowPoSt penalty for failed sectors: 0.8263448805212781 FIL = 826344880521278056 attoFIL
 ```
 
-
+```bash
+go run main.go init-pledge
+InitialPledge for 32 GiB:  0.17011580252903266
+InitialPledge for 1 TiB:  5.443705680929045  
+```
