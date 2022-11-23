@@ -3,17 +3,15 @@ package cmd
 import (
 	"bytes"
 	"fmt"
+	"github.com/filecoin-project/go-state-types/builtin"
+	"github.com/filecoin-project/lotus/chain/types"
+
 	"github.com/filecoin-project/go-address"
 	"github.com/rickiey/sector_penalty/pkg"
 
-	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/specs-actors/v5/actors/builtin"
-	"github.com/filecoin-project/specs-actors/v5/actors/builtin/power"
-	"github.com/filecoin-project/specs-actors/v5/actors/builtin/reward"
-	"github.com/filecoin-project/specs-actors/v5/actors/util/math"
-	"github.com/filecoin-project/specs-actors/v5/actors/util/smoothing"
+	"github.com/filecoin-project/go-state-types/builtin/v9/power"
+	"github.com/filecoin-project/go-state-types/builtin/v9/reward"
 	"github.com/rickiey/loggo"
 	"github.com/spf13/cobra"
 )
@@ -120,19 +118,6 @@ var windowPostCmd = &cobra.Command{
 		fmt.Printf("miner %v Estimated 24-hour windowPoSt penalty for failed sectors: %v FIL = %v attoFIL \n",
 			mineraddr.String(), pkg.ToFloat64(wpostPenalty24h), wpostPenalty24h)
 	},
-}
-
-func ExpectedRewardForPower(rewardEstimate, networkQAPowerEstimate smoothing.FilterEstimate, qaSectorPower abi.StoragePower,
-	projectionDuration abi.ChainEpoch) abi.TokenAmount {
-	networkQAPowerSmoothed := networkQAPowerEstimate.Estimate()
-	if networkQAPowerSmoothed.IsZero() {
-		return rewardEstimate.Estimate()
-	}
-	expectedRewardForProvingPeriod := smoothing.ExtrapolatedCumSumOfRatio(projectionDuration, 0, rewardEstimate, networkQAPowerEstimate)
-	br128 := big.Mul(qaSectorPower, expectedRewardForProvingPeriod) // Q.0 * Q.128 => Q.128
-	br := big.Rsh(br128, math.Precision128)
-
-	return big.Max(br, big.Zero())
 }
 
 func init() {
