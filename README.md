@@ -4,6 +4,7 @@
 
 - [x] windowPoSt  handleProvingDeadline penalty
 - [x] sector InitialPledge calculate
+- [x] sector terminate penalty
 - [ ]  depositToBurn
 - [ ] todo
 
@@ -28,5 +29,14 @@ go run main.go init-pledge
 InitialPledge for 32 GiB:  0.17011580252903266
 InitialPledge for 1 TiB:  5.443705680929045  
 ```
+
+```bash
+go run main.go sector terminate f01132416 16781
+miner: f01132416 sector ID: 16781 , start height: 1451551  expiration height: 3000401,  ExpectedDayReward: 651360883065113 
+penalty for terminating sector : 58320649085073059 attoFIL about 0.0583206491 FIL 
+```
+
+
+
 
 ![Alt](https://repobeats.axiom.co/api/embed/7e33e91436ecc8340f7b2e2988047e1f4a2c016e.svg "Repobeats analytics image")
